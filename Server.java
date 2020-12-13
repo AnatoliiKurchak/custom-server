@@ -54,6 +54,7 @@ class Task implements Callable<Void> {
             List<String> parameters = parser.parseParameters(pathWithParameters);
             String joinedParameters = String.join(" and ", parameters);
             String output = String.format(OUTPUT, joinedParameters);
+	    System.out.println(output);
             writer.write(OUTPUT_HEADERS + output.length() + OUTPUT_END_OF_HEADERS + output);
             writer.flush();
         }
