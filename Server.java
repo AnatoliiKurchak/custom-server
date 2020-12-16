@@ -25,6 +25,8 @@ public class Server {
 
         String fileContentPath = System.getenv("com.teoretyk0706.path");
 
+        System.out.println(fileContentPath);
+
         while (true) {
             Socket socket = serverSocket.accept();
             Task task = new Task(socket, parser, fileContentPath);
@@ -34,7 +36,6 @@ public class Server {
 }
 
 class Task implements Callable<Void> {
-
     private static final String OUTPUT_HEADERS = "HTTP/1.1 200 OK\r\n" +
             "Content-Type: text/html\r\n" +
             "Content-Length: ";
@@ -66,7 +67,7 @@ class Task implements Callable<Void> {
 
             String output = String.format(OUTPUT, new Date(), joinedParameters);
 
-            String fileContent = Files.lines(Paths.get(fileContentPath))
+            String fileContent = Files.lines(Paths.get(fileContentPath, "test.txt"))
                     .map(line -> "<br>" + line + "<br/>")
                     .collect(Collectors.joining("\r\n"));
 
