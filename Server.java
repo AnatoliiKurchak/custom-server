@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,7 +30,7 @@ public class Server {
 
 class Task implements Callable<Void> {
 
-    private static final String OUTPUT = "<html><head><title>Example</title></head><body><p>You've send us request with parameters %s</p></body></html>";
+    private static final String OUTPUT = "<html><head><title>Example</title></head><body><p>Request sent on %s. You've send us request with parameters %s</p></body></html>";
     private static final String OUTPUT_HEADERS = "HTTP/1.1 200 OK\r\n" +
             "Content-Type: text/html\r\n" +
             "Content-Length: ";
@@ -53,8 +54,8 @@ class Task implements Callable<Void> {
             String pathWithParameters = reader.readLine();
             List<String> parameters = parser.parseParameters(pathWithParameters);
             String joinedParameters = String.join(" and ", parameters);
-            String output = String.format(OUTPUT, joinedParameters);
-	    System.out.println(output + " EOF");
+            String output = String.format(OUTPUT, new Date(), joinedParameters);
+	    System.out.println(output);
             writer.write(OUTPUT_HEADERS + output.length() + OUTPUT_END_OF_HEADERS + output);
             writer.flush();
         }
