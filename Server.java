@@ -25,6 +25,8 @@ public class Server {
 
         String fileContentPath = System.getenv("com.teoretyk0706.path");
 
+	Integer port = Integer.valueOf(System.getenv("com.teoretyk0706.port"));
+
         System.out.println(fileContentPath);
 
         while (true) {
