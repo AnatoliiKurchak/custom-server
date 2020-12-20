@@ -21,11 +21,11 @@ public class Server {
     private static ParameterParser parser = new ParameterParser();
 
     public static void main(String[] args) throws Exception {
-        ServerSocket serverSocket = new ServerSocket(8080);
-
         String fileContentPath = System.getenv("com.teoretyk0706.path");
 
 	Integer port = Integer.valueOf(System.getenv("com.teoretyk0706.port"));
+
+	ServerSocket serverSocket = new ServerSocket(port);
 
         System.out.println(fileContentPath);
 
